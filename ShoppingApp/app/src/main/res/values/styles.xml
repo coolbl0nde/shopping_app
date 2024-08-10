@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="h1">
+        <item name="android:fontFamily">@font/raleway_extrabold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/h1TextSize</item>
+    </style>
+
+    <style name="h2">
+        <item name="android:fontFamily">@font/raleway_light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/h2TextSize</item>
+    </style>
+
+    <style name="h3">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/h3TextSize</item>
+    </style>
+
+    <dimen name="h1TextSize">26sp</dimen>
+    <dimen name="h2TextSize">15sp</dimen>
+    <dimen name="h3TextSize">22sp</dimen>
+
+</resources>

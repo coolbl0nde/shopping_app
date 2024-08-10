@@ -1,8 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.ShoppingApp" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_gold</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary_gold</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
 
     <style name="Theme.ShoppingApp" parent="Base.Theme.ShoppingApp" />

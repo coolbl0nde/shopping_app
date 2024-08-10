@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primary_gold">#F2AC32</color>
+    <color name="secondary_gold">#FFBE4E</color>
+    <color name="accent_coral">#FF7373</color>
 </resources>
