@@ -7,6 +7,6 @@ import com.example.shoppingapp.R
 class LoginRegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_register)
+        setContentView(R.layout.fragment_auth)
     }
 }

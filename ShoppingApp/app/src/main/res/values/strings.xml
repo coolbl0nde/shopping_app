@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Shopping App</string>
     <string name="ultimate_destination">Your Ultimate Destination for Exquisite Jewelry</string>
-    <string name="amber_boutique">Discover the elegance and timeless beauty of amber jewelry with Amber Boutique.</string>
+    <string name="discover_the_elegance">Discover the elegance and timeless beauty of amber jewelry with Amber Boutique.</string>
+    <string name="shop_with_confidence">Shop with confidence and find the perfect addition to your collection today.</string>
+    <string name="amber_boutique">Amber Boutique</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>
