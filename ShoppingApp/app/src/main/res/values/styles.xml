@@ -18,6 +18,13 @@
         <item name="android:textSize">@dimen/h3TextSize</item>
     </style>
 
+    <style name="editText">
+        <item name="android:fontFamily">@font/raleway_light</item>
+        <item name="android:background">@drawable/et_style</item>
+        <item name="android:textSize">@dimen/h2TextSize</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
     <dimen name="h1TextSize">26sp</dimen>
     <dimen name="h2TextSize">15sp</dimen>
     <dimen name="h3TextSize">22sp</dimen>

@@ -6,4 +6,6 @@
     <color name="primary_gold">#F2AC32</color>
     <color name="secondary_gold">#FFBE4E</color>
     <color name="accent_coral">#FF7373</color>
+
+    <color name="grey">#F8F8F8</color>
 </resources>

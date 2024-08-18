@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/background_first" />
+        app:srcCompat="@drawable/background01" />
 
     <TextView
         style="@style/h1"
