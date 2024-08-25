@@ -1,5 +1,7 @@
 plugins {
     id("com.android.application")
+    id("kotlin-android")
+    id("androidx.navigation.safeargs.kotlin")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     id("dagger.hilt.android.plugin")
@@ -56,6 +58,9 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-compiler:2.48.1")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     //implementation("br.com.simplepass:loading-button-android:2.2.0")
 }
