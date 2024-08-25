@@ -13,10 +13,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.shoppingapp.R
 import com.example.shoppingapp.data.User
 import com.example.shoppingapp.databinding.FragmentRegisterBinding
+import com.example.shoppingapp.util.RegisterValidation
 import com.example.shoppingapp.util.Resource
 import com.example.shoppingapp.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 const val TAG = "RegisterFragment"
 
@@ -73,5 +76,31 @@ class RegisterFragment: Fragment(R.layout.fragment_auth) {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.validation.collect {
+                    if (it.email is RegisterValidation.Failed) {
+                        withContext(Dispatchers.Main) {
+                            binding.emailRegisterEt.apply {
+                                requestFocus()
+                                error = it.email.message
+                            }
+                        }
+                    }
+
+                    if (it.password is RegisterValidation.Failed) {
+                        withContext(Dispatchers.Main) {
+                            binding.passwordRegisterEt.apply {
+                                requestFocus()
+                                error = it.password.message
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
     }
 }
