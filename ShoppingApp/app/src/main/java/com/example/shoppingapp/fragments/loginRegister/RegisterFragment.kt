@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.shoppingapp.R
 import com.example.shoppingapp.data.User
 import com.example.shoppingapp.databinding.FragmentRegisterBinding
@@ -51,6 +52,10 @@ class RegisterFragment: Fragment(R.layout.fragment_auth) {
                 val password = passwordRegisterEt.text.toString().trim()
 
                 viewModel.createAccountWithEmailAndPassword(user, password)
+            }
+
+            cancelRegisterButton.setOnClickListener {
+                findNavController().navigate(R.id.action_registerFragment_to_authFragment)
             }
         }
 
