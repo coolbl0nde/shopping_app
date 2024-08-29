@@ -49,12 +49,12 @@
 
     <Button
         android:id="@+id/start_introduction_button"
+        style="@style/h2"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginBottom="24dp"
-        android:fontFamily="@font/raleway_light"
-        android:text="Let's get started"
-        android:textSize="20sp"
+        android:text="@string/get_started"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView" />
