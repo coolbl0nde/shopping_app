@@ -14,4 +14,8 @@
     <string name="last_name">Last Name</string>
     <string name="first_name">First Name</string>
     <string name="get_started">Let\'s get started</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
 </resources>
