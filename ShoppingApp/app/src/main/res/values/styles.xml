@@ -13,9 +13,9 @@
     </style>
 
     <style name="h3">
-        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">@font/raleway_medium</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/h3TextSize</item>
+        <item name="android:textSize">@dimen/h2TextSize</item>
     </style>
 
     <style name="editText">
@@ -23,6 +23,14 @@
         <item name="android:background">@drawable/et_style</item>
         <item name="android:textSize">@dimen/h2TextSize</item>
         <item name="android:padding">10dp</item>
+    </style>
+
+
+    <style name="tabLayout_text" parent="TextAppearance.AppCompat">
+        <item name="color">@color/black</item>
+        <item name="fontFamily">@font/raleway_medium</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <dimen name="h1TextSize">26sp</dimen>
