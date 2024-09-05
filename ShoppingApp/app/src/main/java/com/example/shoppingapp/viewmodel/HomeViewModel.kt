@@ -24,6 +24,9 @@ class HomeViewModel @Inject constructor(
     private val _products = MutableLiveData<List<Product>>()
     val products: MutableLiveData<List<Product>> = _products
 
+    private val _filterProducts = MutableLiveData<List<Product>?>()
+    val filterProducts: MutableLiveData<List<Product>?> = _filterProducts
+
     init {
         loadCategoriesFromFirebase()
         loadProductsFromFirebase()
@@ -58,6 +61,31 @@ class HomeViewModel @Inject constructor(
                 _categories.value = categoryList
             }catch (e: Exception){
                 Log.e("HomeViewModel", "Error loading categories", e)
+            }
+        }
+    }
+
+    fun filterProductsByCategory(category: String) {
+        if (category == "All"){
+            _filterProducts.value = _products.value
+            return
+        }
+
+        viewModelScope.launch {
+            try {
+                val categoryDocument = db.collection("categories")
+                    .whereEqualTo("name", category)
+                    .get()
+                    .await()
+
+                val categoryId = categoryDocument.documents.firstOrNull()?.id
+
+                if (categoryId != null) {
+                    val filteredList = _products.value?.filter { it.categoryId == categoryId }
+                    _filterProducts.value = filteredList
+                }
+            }  catch (e: Exception) {
+                Log.e("HomeViewModel", "Error filtering products by category", e)
             }
         }
     }

@@ -44,11 +44,21 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
         setupRecyclerView()
         observeProducts()
+
+        observeFilterProducts()
     }
 
     private fun observeProducts() {
         viewModel.products.observe(viewLifecycleOwner){
             productAdapter.updateProducts(it)
+        }
+    }
+
+    private fun observeFilterProducts() {
+        viewModel.filterProducts.observe(viewLifecycleOwner){
+            if (it != null) {
+                productAdapter.updateProducts(it)
+            }
         }
     }
 
@@ -72,12 +82,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedCategory = categoryAdapter.getItem(position)
-                filterProductsByCategory(selectedCategory.toString())
+                viewModel.filterProductsByCategory(selectedCategory.toString())
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Ничего не делать, если ничего не выбрано
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) { }
         }
 
     }
@@ -92,17 +100,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 }
             }
         }
-    }
-
-
-    private fun filterProductsByCategory(category: String) {
-        val selectedCategoryId = viewModel.categories.find {
-
-        }
-
-        val filteredProducts = if (category == "All"){
-            viewModel.products
-        }else
     }
 
 }
