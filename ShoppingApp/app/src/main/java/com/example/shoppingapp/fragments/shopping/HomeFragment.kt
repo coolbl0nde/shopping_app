@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shoppingapp.R
+import com.example.shoppingapp.adapters.ProductAdapter
 import com.example.shoppingapp.databinding.FragmentHomeBinding
 import com.example.shoppingapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +25,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by viewModels<HomeViewModel>()
     private lateinit var categoryAdapter: ArrayAdapter<String>
+    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +41,24 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
         setupSpinner()
         observeCategories()
+
+        setupRecyclerView()
+        observeProducts()
+    }
+
+    private fun observeProducts() {
+        viewModel.products.observe(viewLifecycleOwner){
+            productAdapter.updateProducts(it)
+        }
+    }
+
+    private fun setupRecyclerView() {
+        productAdapter = ProductAdapter(emptyList())
+
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = productAdapter
+        }
     }
 
     private fun setupSpinner() {
@@ -51,7 +72,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedCategory = categoryAdapter.getItem(position)
-                //filterProductsByCategory(selectedCategory ?: "Все")
+                filterProductsByCategory(selectedCategory.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -75,7 +96,13 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
 
     private fun filterProductsByCategory(category: String) {
-        TODO("Not yet implemented")
+        val selectedCategoryId = viewModel.categories.find {
+
+        }
+
+        val filteredProducts = if (category == "All"){
+            viewModel.products
+        }else
     }
 
 }
