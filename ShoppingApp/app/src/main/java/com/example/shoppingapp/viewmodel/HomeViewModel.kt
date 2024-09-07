@@ -93,4 +93,24 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun searchProductsByName(searchQuery: String) {
+        viewModelScope.launch {
+            db.collection("products")
+                .orderBy("name_lowercase")
+                .startAt(searchQuery)
+                .endAt(searchQuery + "\uf8ff")
+                .get()
+                .addOnSuccessListener { result ->
+                    val productList = mutableListOf<Product>()
+                    for (document in result) {
+                        val product = document.toObject(Product::class.java)
+                        productList.add(product)
+                    }
+                    _products.value = productList
+                }.addOnFailureListener { e ->
+                    Log.e("HomeViewModel", "Error searching products", e)
+                }
+        }
+    }
+
 }
