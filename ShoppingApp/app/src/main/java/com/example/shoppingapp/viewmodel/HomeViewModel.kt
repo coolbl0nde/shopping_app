@@ -24,17 +24,21 @@ class HomeViewModel @Inject constructor(
     private val _products = MutableLiveData<List<Product>>()
     val products: MutableLiveData<List<Product>> = _products
 
-    private val _filterProducts = MutableLiveData<List<Product>?>()
-    val filterProducts: MutableLiveData<List<Product>?> = _filterProducts
-
     init {
         loadCategoriesFromFirebase()
         loadProductsFromFirebase()
     }
 
-    private fun loadProductsFromFirebase() {
+    private fun loadProductsFromFirebase(categoryId: String = "") {
         viewModelScope.launch {
-            db.collection("products").get()
+
+            val query = if (categoryId.isNotEmpty()){
+                db.collection("products").whereEqualTo("categoryId", categoryId)
+            } else {
+                db.collection("products")
+            }
+
+            query.get()
                 .addOnSuccessListener { result ->
                     val productList = mutableListOf<Product>()
                     for (document in result) {
@@ -67,7 +71,7 @@ class HomeViewModel @Inject constructor(
 
     fun filterProductsByCategory(category: String) {
         if (category == "All"){
-            _filterProducts.value = _products.value
+            loadProductsFromFirebase()
             return
         }
 
@@ -81,8 +85,7 @@ class HomeViewModel @Inject constructor(
                 val categoryId = categoryDocument.documents.firstOrNull()?.id
 
                 if (categoryId != null) {
-                    val filteredList = _products.value?.filter { it.categoryId == categoryId }
-                    _filterProducts.value = filteredList
+                    loadProductsFromFirebase(categoryId)
                 }
             }  catch (e: Exception) {
                 Log.e("HomeViewModel", "Error filtering products by category", e)

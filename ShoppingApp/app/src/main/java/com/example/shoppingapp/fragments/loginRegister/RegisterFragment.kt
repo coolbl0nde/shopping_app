@@ -55,7 +55,7 @@ class RegisterFragment: Fragment(R.layout.fragment_auth) {
             }
 
             cancelRegisterButton.setOnClickListener {
-                findNavController().navigate(R.id.action_registerFragment_to_authFragment)
+                findNavController().navigateUp()
             }
         }
 

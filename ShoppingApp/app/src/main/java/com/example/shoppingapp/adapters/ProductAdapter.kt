@@ -10,11 +10,14 @@ import com.example.shoppingapp.databinding.ItemProductBinding
 class ProductAdapter(private var productList: List<Product>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
 
-    inner class ProductViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ProductViewHolder(private val binding: ItemProductBinding)
+        : RecyclerView.ViewHolder(binding.root){
 
         fun bind(product: Product) {
             binding.apply {
-                Glide.with(itemView).load(product.imageUrl).into(productImageView)
+                Glide.with(itemView)
+                    .load(product.imageUrl)
+                    .into(productImageView)
                 productTitleTextView.text = product.name
                 productPriceTextView.text = "${product.price} $"
             }
@@ -31,6 +34,10 @@ class ProductAdapter(private var productList: List<Product>) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
         holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            onClick?.invoke(product)
+        }
     }
 
     fun updateProducts(newProductList: List<Product>) {
@@ -38,5 +45,6 @@ class ProductAdapter(private var productList: List<Product>) :
         notifyDataSetChanged()
     }
 
+    var onClick: ((Product) -> Unit)? = null
 
 }

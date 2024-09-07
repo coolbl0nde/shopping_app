@@ -11,16 +11,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shoppingapp.R
 import com.example.shoppingapp.adapters.ProductAdapter
 import com.example.shoppingapp.databinding.FragmentHomeBinding
+import com.example.shoppingapp.util.showBottomNavigationView
 import com.example.shoppingapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment: Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by viewModels<HomeViewModel>()
@@ -45,20 +47,15 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         setupRecyclerView()
         observeProducts()
 
-        observeFilterProducts()
-    }
-
-    private fun observeProducts() {
-        viewModel.products.observe(viewLifecycleOwner){
-            productAdapter.updateProducts(it)
+        productAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
         }
     }
 
-    private fun observeFilterProducts() {
-        viewModel.filterProducts.observe(viewLifecycleOwner){
-            if (it != null) {
-                productAdapter.updateProducts(it)
-            }
+    private fun observeProducts() {
+        viewModel.products.observe(viewLifecycleOwner) {
+            productAdapter.updateProducts(it)
         }
     }
 
@@ -72,21 +69,28 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     private fun setupSpinner() {
-        categoryAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item,
+        categoryAdapter = ArrayAdapter(
+            requireContext(), R.layout.spinner_item,
             mutableListOf()
         )
         categoryAdapter.setDropDownViewResource(R.layout.spinner_list_items)
         binding.categorySpinner.adapter = categoryAdapter
 
 
-        binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedCategory = categoryAdapter.getItem(position)
-                viewModel.filterProductsByCategory(selectedCategory.toString())
-            }
+        binding.categorySpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedCategory = categoryAdapter.getItem(position)
+                    viewModel.filterProductsByCategory(selectedCategory.toString())
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>) { }
-        }
+                override fun onNothingSelected(parent: AdapterView<*>) {}
+            }
 
     }
 
@@ -100,6 +104,12 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        showBottomNavigationView()
     }
 
 }

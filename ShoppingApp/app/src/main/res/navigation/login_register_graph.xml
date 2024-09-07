@@ -43,29 +43,10 @@
         android:id="@+id/loginFragment"
         android:name="com.example.shoppingapp.fragments.loginRegister.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_authFragment"
-            app:destination="@id/authFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@id/introductionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_login"/>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.shoppingapp.fragments.loginRegister.RegisterFragment"
         android:label="RegisterFragment"
-        tools:layout="@layout/fragment_register">
-        <action
-            android:id="@+id/action_registerFragment_to_authFragment"
-            app:destination="@id/authFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@id/introductionFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+        tools:layout="@layout/fragment_register"/>
 </navigation>

@@ -48,7 +48,7 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
             }
 
             cancelLoginButton.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFragment_to_authFragment)
+                findNavController().navigateUp()
             }
         }
 
