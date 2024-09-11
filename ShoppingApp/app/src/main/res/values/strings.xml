@@ -20,4 +20,7 @@
     <string name="cart">Cart</string>
     <string name="search_now">Search Now</string>
     <string name="add_to_cart">Add to cart</string>
+    <string name="decrease_the_quantity">Decrease the quantity</string>
+    <string name="buy">BUY</string>
+    <string name="total_price">Total price</string>
 </resources>
